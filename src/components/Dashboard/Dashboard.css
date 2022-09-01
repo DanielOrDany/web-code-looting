@@ -1,0 +1,327 @@
+.Dashboard {
+    display: flex;
+    justify-content: space-between;
+    background: #fdfffc;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.LeftMenu {
+    align-items: center;
+    width: 75px;
+    height: calc(100vh + 10px);
+    border-right: 1px solid rgb(231, 231, 231);
+}
+
+.LeftMenu svg {
+    margin-top: 40px;
+    cursor: pointer;
+}
+
+.Constructor {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.RightMenu {
+    align-items: center;
+    border-left: 1px solid rgb(231, 231, 231);
+    width: 75px;
+    padding: 5px;
+    height: 100vh;
+}
+
+.Header {
+    width: calc(100% - 80px);
+    display: flex;
+    align-items: center;
+    text-align: start;
+    margin: 10px 40px;
+    font-size: 30px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-bottom: 1px solid rgb(231, 231, 231);
+}
+
+.Header span {
+    margin-top: -20px;
+}
+
+.green {
+    color: #55AD9C;
+}
+
+.cost {
+    color: #3fbba2;
+    margin-left: 7px;
+    padding: 0px;
+    left: 0;
+    font-weight: bold;
+    right: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 18px;
+    font-style: italic;
+}
+
+.Header img {
+    height: 120px;
+    width: 120px;
+}
+
+.Body {
+    display: flex;
+    width: 100%;
+    margin-top: -20px;
+}
+
+.RightBodyHeader {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(231, 231, 231);
+}
+
+/* At the top level of your code */
+@media screen and (max-width: 600px) {
+    .Body {
+        flex-wrap: wrap;
+    }
+
+    .RightBodyPart {
+        padding: 40px;
+        border-top: 1px solid rgb(231, 231, 231);
+        border-left: 0px;
+    }
+}
+
+.LeftBodyPart {
+    flex: 50%;
+    padding: 0px 40px 40px 40px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ParamItem {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 20px;
+}
+
+.ItemOptions {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.CheckOption {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.EmptyList {
+    width: 100%;
+    text-align: start;
+    font-style: italic;
+}
+
+.CheckOption input {
+    margin-right: 10px;
+}
+
+.FieldOption {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    justify-content: space-between;
+}
+
+.ItemTitle {
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.field {
+    border-bottom: #1b1f23 2px solid;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    margin-left: 20px;
+    background: none;
+    width: 200px;
+    font-size: 16px;
+}
+
+.RightBodyPart {
+    flex: 50%;
+    padding: 0px 40px 40px 40px;
+    border-left: 1px solid rgb(231, 231, 231);
+}
+
+.Footer {
+    width: calc(100% - 30px);
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+
+.Button {
+    border: 2px solid #1b1f23;
+    border-radius: 3px;
+    padding: 10px 20px;
+    font-weight: bold;
+    background: #fff;
+    margin: 8px;
+    cursor: pointer;
+}
+
+.Button:hover {
+    color: #fff;
+    background: #1b1f23;
+}
+
+.Theme {
+    border: #1b1f23 3px solid;
+    border-radius: 5px;
+    width: max-content;
+    margin: 20px auto;
+    cursor: pointer;
+}
+
+.Sun {
+    padding: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.Moon {
+    padding: 5px;
+    border-bottom-left-radius: 1px;
+    border-bottom-right-radius: 1px;
+}
+
+.dark {
+    background: #1b1f23;
+    color: #fff;
+}
+
+.white {
+    background: #fff;
+    color: #1b1f23;
+}
+
+.Theme.white {
+    border: #fff 3px solid;
+}
+
+.Button.dark {
+    border: #fff 3px solid;
+}
+
+.field.dark {
+    color: #fff;
+    border-bottom: #fff 3px solid;
+}
+
+.Button.dark:hover {
+    background: #fff;
+    color: #1b1f23;
+}
+
+.Footer.dark {
+    background: #262a2d;
+}
+
+.Footer.white {
+    background: #ecf2f2;
+}
+
+.InfoCard {
+    position: absolute;
+    background: #55AD9C;
+    height: 100vh;
+    width: 100%;
+    animation-name: fadeInDown;
+    animation-duration: 1s;
+}
+
+.InfoCardConstructor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-left: 80px;
+}
+
+.InfoCardConstructor .green {
+    color: white;
+}
+
+.InfoCardConstructor .Header {
+    border-bottom: none;
+    align-items: center;
+}
+
+.InfoCardConstructor .Header span {
+    margin-top: 0px;
+}
+
+.InfoCardConstructor .Body {
+    display: flex;
+    flex-wrap: wrap;
+    color: #fff;
+    width: 400px;
+    font-style: italic;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.InfoCardConstructor .Body a {
+    color: #000;
+    font-weight: bold;
+    margin-left: 1px;
+    margin-right: 1px;
+    text-decoration: none;
+}
+
+.InfoCard svg {
+    height: 40px;
+    width: 40px;
+
+    -webkit-animation: spin 1s linear;
+    -moz-animation: spin 1s linear;
+    animation: spin 1s linear;
+}
+
+@keyframes fadeInDown {
+    0% {
+       transform: translateY(-100vh);
+    }
+    100% {
+       transform: translateY(0);
+    }
+}
+
+@-moz-keyframes spin { 
+    100% { -moz-transform: rotate(360deg); } 
+}
+
+@-webkit-keyframes spin { 
+    100% { -webkit-transform: rotate(360deg); } 
+}
+
+@keyframes spin { 
+    100% { 
+        -webkit-transform: rotate(360deg); 
+        transform:rotate(360deg); 
+    } 
+}
