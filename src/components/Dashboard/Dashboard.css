@@ -11,14 +11,22 @@
 }
 
 .LeftMenu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     width: 75px;
     height: calc(100vh + 10px);
     border-right: 1px solid rgb(231, 231, 231);
 }
 
-.LeftMenu svg {
+.menu {
     margin-top: 40px;
+    cursor: pointer;
+}
+
+.twitter {
+    margin-bottom: 40px;
     cursor: pointer;
 }
 
@@ -97,6 +105,16 @@
         padding: 40px;
         border-top: 1px solid rgb(231, 231, 231);
         border-left: 0px;
+    }
+
+    .TableCard {
+        height: 100vh;
+        width: 100%;
+    }
+
+    .CardBackground {
+        width: 100%;
+        height: 100vh;
     }
 }
 
@@ -275,11 +293,15 @@
     margin-top: 0px;
 }
 
+.Info {
+    margin-bottom: 40px;
+}
+
 .InfoCardConstructor .Body {
     display: flex;
     flex-wrap: wrap;
     color: #fff;
-    width: 400px;
+    width: 320px;
     font-style: italic;
     margin-left: 40px;
     margin-right: 40px;
@@ -291,6 +313,17 @@
     margin-left: 1px;
     margin-right: 1px;
     text-decoration: none;
+}
+
+.InfoButton {
+    font-style: normal;
+    font-size: 20px;
+    padding: 5px;
+    margin-left: 60px;
+}
+
+.InfoButton a:hover {
+    color: #fff;
 }
 
 .InfoCard svg {
@@ -324,4 +357,188 @@
         -webkit-transform: rotate(360deg); 
         transform:rotate(360deg); 
     } 
+}
+
+.TableCard.white {
+    height: 600px;
+    width: 800px;
+    margin: auto;
+    background: #fff;
+    border: #fff 1px solid;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+}
+
+.TableCard.dark {
+    height: 600px;
+    width: 800px;
+    margin: auto;
+    background: #1b1f23;
+    border: #1b1f23 1px solid;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+}
+
+.CardBackground {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    background: #55ad9b38;
+}
+
+.CardHeader {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.CardHeader svg {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.CardHeader span {
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.ColumnHeader {
+    display: flex;
+    margin-top: 10px;
+}
+
+.ColumnHeader select {
+    padding: 0px 10px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid #1b1f23;
+    font-weight: bold;
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+.ColumnHeader select.dark {
+    border-bottom: 3px solid #fff;
+}
+
+.ColumnHeader .field {
+    font-size: 15px;
+    font-weight: bold;
+    padding-left: 20px;
+    width: 110px;
+}
+
+.ColumnHeader .Button {
+    padding: 5px 7px;
+    margin-left: 20px;
+    margin-bottom: -0px;
+}
+
+.ColumnList {
+    background: #262a2d11;
+    height: 100%;
+    margin: 20px;
+    overflow-y: scroll;
+}
+
+.ColumnList.dark {
+    background: #f1f1f125;
+    height: 100%;
+    margin: 20px;
+}
+
+.ColumnBottom {
+    align-self: flex-end;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    margin-top: auto;
+    margin-right: 10px;
+}
+
+.ColumnBottom .Button {
+    width: max-content;
+}
+
+.columnIssue {
+    margin-top: 10px;
+    padding: 6px 10px;
+    width: max-content;
+    margin-left: 15px;
+    border-radius: 4px;
+    background: rgba(255, 247, 0, 0.733);
+}
+
+.columnRow {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    background: #53a26c3c;
+    margin: 5px;
+    flex-direction: row;
+}
+
+.columnRow .Button {
+    font-size: 10px;
+    padding: 5px 10px;
+}
+
+.columnRow span {
+    margin-right: 10px;
+    min-width: 100px;
+}
+
+.ColumnBottom .field {
+    margin-bottom: 8px;
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.TableRow {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    background: #53a26c3c;
+    margin: 5px;
+    flex-direction: row;
+}
+
+.TableRow .Button {
+    font-size: 10px;
+    padding: 5px 10px;
+}
+
+.TableRow span {
+    margin-right: 10px;
+    min-width: 100px;
+}
+
+.tip {
+    width: 100px;
+    background: #55ad9bc4;
+    color: #fff;
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.ListOfTables {
+    overflow-y: scroll;
+    max-height: 450px;
 }
