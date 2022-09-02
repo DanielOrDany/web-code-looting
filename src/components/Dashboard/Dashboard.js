@@ -7,6 +7,31 @@ function Dashboard() {
     const urlSearchParams = new URLSearchParams(window.location.search)
     const params = Object.fromEntries(urlSearchParams.entries())
 
+    if (params.success) {
+        const data = JSON.parse(localStorage.getItem('data'))
+
+        if (data && data.time && new Date().getTime() - data.time > 3600000) {
+            axios.post('https://api.code.vocations/apig', {
+                tables: data.tables,
+                framework_type: data.framework_type,
+                database_type: data.database,
+                use_auth: data.use_auth,
+                name: data.name,
+                description: data.description,
+                packageName: data.packageName,
+                author: data.author
+            })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        } else {
+            localStorage.clear()
+        }
+    }
+
     const [columns, setColumns] = useState(Array)
     const [columnName, setColumnName] = useState('')
     const [columnType, setColumnType] = useState('String')
@@ -119,22 +144,19 @@ function Dashboard() {
 
     const generate = () => {
         setLoading(true)
-        axios.post('https://api.code.vocations/apig', {
-            tables,
-            framework_type: "express",
-            database_type: database,
-            use_auth: useJWT,
-            name,
-            description,
-            packageName,
-            author
-        })
-        .then(function (response) {
-            console.log(response);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+        localStorage.setItem('data', JSON.stringify(
+            {
+                tables,
+                framework_type: "express",
+                database: database,
+                use_auth: useJWT,
+                name,
+                description,
+                packageName,
+                author,
+                time: new Date().getTime()
+            }
+        ))
     }
 
     return (
@@ -305,9 +327,9 @@ function Dashboard() {
                     </div>
                 </div>
                 <div className={isDark ? 'Footer dark' : 'Footer white'}>
-                    <div className={isDark ? 'Button dark' : 'Button white'} onClick={() => generate()}>
+                    <a href="#!" className={isDark ? 'Button dark' : 'Button white'} onClick={() => generate()} data-product={useJWT & database === 'mongodb' ? '787442' : useJWT & database === 'postgresql' ? '787443' : !useJWT & database === 'mongodb' ? '787439' : !useJWT & database === 'postgresql' ? '787440' : useJWT & database !== 'postgresql' & database !== 'mongodb' ? '787438' : '' /* free */}>
                         GENERATE FOR {useJWT & database === 'mongodb' ? '8$' : useJWT & database === 'postgresql' ? '7$' : !useJWT & database === 'mongodb' ? '5$' : !useJWT & database === 'postgresql' ? '4$' : useJWT & database !== 'postgresql' & database !== 'mongodb' ? '3$' : 'FREE'}
-                    </div>
+                    </a>
                     <div className={isDark ? 'Button dark' : 'Button white'} onClick={() => share()}>
                         SHARE...
                     </div>
