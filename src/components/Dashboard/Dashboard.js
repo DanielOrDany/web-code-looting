@@ -4,6 +4,9 @@ import './Dashboard.css'
 import LogoIcon from '../../icons/logo.svg'
 
 function Dashboard() {
+    const urlSearchParams = new URLSearchParams(window.location.search)
+    const params = Object.fromEntries(urlSearchParams.entries())
+
     const [columns, setColumns] = useState(Array)
     const [columnName, setColumnName] = useState('')
     const [columnType, setColumnType] = useState('String')
@@ -15,9 +18,16 @@ function Dashboard() {
     const [tables, setTables] = useState(Array)
     const [required, setRequired] = useState('false')
     const [defaultValue, setDefaultValue] = useState('')
-    const [useJWT, setUseJWT] = useState(false)
-    const [useExpress, setUseExpress] = useState(true)
-    const [database, setDatabase] = useState('mysql')
+    const [useJWT, setUseJWT] = useState(params.jwt ? params.jwt === 'true' ? true : false : false)
+    const [useExpress, setUseExpress] = useState(params.express ? params.express === 'true' ? true : false : true)
+    const [database, setDatabase] = useState(params.database ? params.database : 'mysql')
+    const [name, setName] = useState(params.name ? params.name : '')
+    const [description, setDescription] = useState(params.description ? params.description : '')
+    const [packageName, setPackageName] = useState(params.package ? params.package : '')
+    const [author, setAuthor] = useState(params.author ? params.author : '')
+    const [isShare, setShare] = useState(false)
+    const [shareUrl, setShareUrl] = useState('')
+    const [isLoading, setLoading] = useState(false)
 
     const openTwitter = () => {
         window.open('https://twitter.com/codevocations')
@@ -95,8 +105,46 @@ function Dashboard() {
         }
     }
 
+    const share = () => {
+        let shareURL = `https://code.vocations?jwt=${useJWT}&express=${useExpress}&database=${database}`
+        
+        if (name.trim() !== '') shareURL += `&name=${name}`
+        if (description.trim() !== '') shareURL += `&description=${description}`
+        if (packageName.trim() !== '') shareURL += `&package=${packageName}`
+        if (author.trim() !== '') shareURL += `&author=${author}`
+
+        setShare(true)
+        setShareUrl(shareURL)
+    }
+
+    const generate = () => {
+        setLoading(true)
+        
+    }
+
     return (
         <div className='Dashboard'>
+            { isLoading &&
+                <div className='CardBackground'>
+                    <div className='Loader'/>
+                </div>
+            }
+            { isShare &&
+                <div className='CardBackground'>
+                    <div className={isDark ? 'ShareCard dark' : 'ShareCard white'}>
+                        <div className='ShareCardTop'>
+                            <div className='ShareTitle'>Share your configuration</div>
+                        </div>
+                        <div className='ShareBody'>
+                            <div className='ShareInfo'>Use this link to share the current configuration. Attributes can be removed from the URL if you want to rely on our defaults.</div>
+                            <input className={isDark ? 'field dark' : 'field white'} value={shareUrl}/>
+                        </div>
+                        <div className='ShareCardBottom'>
+                            <div className={isDark ? 'Button dark' : 'Button white'} onClick={() => setShare(false)}>CLOSE</div>
+                        </div>
+                    </div>
+                </div>
+            }
             { isMenu &&
                 <div className='InfoCard'>
                     <div className='LeftMenu'>
@@ -200,7 +248,7 @@ function Dashboard() {
                                 Auth
                             </div>
                             <div className='ItemOptions'>
-                                <div className='CheckOption'><input value={useJWT} onChange={() => setUseJWT(!useJWT)} type="checkbox"/> JWT <div className='cost' title='price of this option'>3$</div></div>
+                                <div className='CheckOption'><input value={useJWT} checked={useJWT} onChange={() => setUseJWT(!useJWT)} type="checkbox"/> JWT <div className='cost' title='price of this option'>3$</div></div>
                                 { useJWT &&  <div className='tip'>'users' table will be created automatically</div>}
                             </div>
                         </div>
@@ -209,10 +257,10 @@ function Dashboard() {
                                 Project Metadata
                             </div>
                             <div className='ItemOptions'>
-                                <div className='FieldOption'>Name <input placeholder='demo' className={isDark ? 'field dark' : 'field white'}/></div>
-                                <div className='FieldOption'>Description <input placeholder='demo project' className={isDark ? 'field dark' : 'field white'}/></div>
-                                <div className='FieldOption'>Package name <input placeholder='com.example.demo' className={isDark ? 'field dark' : 'field white'}/></div>
-                                <div className='FieldOption'>Author <input placeholder='your name' className={isDark ? 'field dark' : 'field white'}/></div>
+                                <div className='FieldOption'>Name <input placeholder='demo' value={name} onChange={(e) => setName(e.target.value)} className={isDark ? 'field dark' : 'field white'}/></div>
+                                <div className='FieldOption'>Description <input placeholder='demo project' value={description} onChange={(e) => setDescription(e.target.value)} className={isDark ? 'field dark' : 'field white'}/></div>
+                                <div className='FieldOption'>Package name <input placeholder='com.example.demo' value={packageName} onChange={(e) => setPackageName(e.target.value)} className={isDark ? 'field dark' : 'field white'}/></div>
+                                <div className='FieldOption'>Author <input placeholder='your name' value={author} onChange={(e) => setAuthor(e.target.value)} className={isDark ? 'field dark' : 'field white'}/></div>
                             </div>
                         </div>
                     </div>
@@ -242,10 +290,10 @@ function Dashboard() {
                     </div>
                 </div>
                 <div className={isDark ? 'Footer dark' : 'Footer white'}>
-                    <div className={isDark ? 'Button dark' : 'Button white'}>
-                        GENERATE
+                    <div className={isDark ? 'Button dark' : 'Button white'} onClick={() => generate()}>
+                        GENERATE FOR {useJWT & database === 'mongodb' ? '8$' : useJWT & database === 'postgresql' ? '7$' : !useJWT & database === 'mongodb' ? '5$' : !useJWT & database === 'postgresql' ? '4$' : useJWT & database !== 'postgresql' & database !== 'mongodb' ? '3$' : 'FREE'}
                     </div>
-                    <div className={isDark ? 'Button dark' : 'Button white'}>
+                    <div className={isDark ? 'Button dark' : 'Button white'} onClick={() => share()}>
                         SHARE...
                     </div>
                 </div>

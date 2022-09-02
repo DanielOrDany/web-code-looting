@@ -359,6 +359,64 @@
     } 
 }
 
+.ShareCard.white {
+    height: max-content;
+    width: 500px;
+    margin: auto;
+    background: #fff;
+    border: #fff 1px solid;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ShareCard.dark {
+    height: max-content;
+    width: 500px;
+    margin: auto;
+    background: #1b1f23;
+    border: #1b1f23 1px solid;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ShareCardTop {
+    display: flex;
+    padding: 15px;
+    border-bottom: 1px solid rgb(231, 231, 231);
+    margin-bottom: 20px;
+}
+
+.ShareTitle {
+    font-size: 22px;
+    font-weight: 600;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.ShareBody {
+    display: flex;
+    flex-direction: column;
+}
+
+.ShareBody .field {
+    margin-top: 20px;
+    width: calc(100% - 45px);
+}
+
+.ShareInfo {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ShareCardBottom {
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid rgb(231, 231, 231);
+    padding: 10px;
+    margin-top: 20px;
+}
+
 .TableCard.white {
     height: 600px;
     width: 800px;
@@ -392,7 +450,7 @@
     height: 100vh;
     width: 100%;
     position: absolute;
-    background: #55ad9b38;
+    background: #7eaaa138;
 }
 
 .CardHeader {
@@ -541,4 +599,59 @@
 .ListOfTables {
     overflow-y: scroll;
     max-height: 450px;
+}
+
+.Loader {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 8vmax;
+    height: 8vmax;
+    border-right: 4px solid rgb(30, 255, 0);
+    border-radius: 100%;
+    animation: spinRight 800ms linear infinite; 
+}
+
+.Loader:before, .Loader:after {
+    content: '';
+    width: 6vmax;
+    height: 6vmax;
+    display: block;
+    position: absolute;
+    top: calc(50% - 3vmax);
+    left: calc(50% - 3vmax);
+    border-left: 3px solid #000;
+    border-radius: 100%;
+    animation: spinLeft 800ms linear infinite;
+}
+  
+.Loader:after {
+    width: 4vmax;
+    height: 4vmax;
+    top: calc(50% - 2vmax);
+    left: calc(50% - 2vmax);
+    border: 0;
+    border-right: 2px solid #000;
+    animation: none;
+}
+  
+@keyframes spinLeft {
+    from { 
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(720deg); 
+    }
+}
+  
+@keyframes spinRight {
+    from {
+        transform:rotate(360deg);
+    }
+    to {
+        transform:rotate(0deg);
+    }
 }
