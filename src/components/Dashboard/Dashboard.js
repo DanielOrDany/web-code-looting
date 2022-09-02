@@ -119,7 +119,22 @@ function Dashboard() {
 
     const generate = () => {
         setLoading(true)
-        
+        axios.post('https://api.code.vocations/apig', {
+            tables,
+            framework_type: "express",
+            database_type: database,
+            use_auth: useJWT,
+            name,
+            description,
+            packageName,
+            author
+        })
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     }
 
     return (
