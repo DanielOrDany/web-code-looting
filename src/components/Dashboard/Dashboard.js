@@ -143,20 +143,24 @@ function Dashboard() {
     }
 
     const generate = () => {
-        setLoading(true)
-        localStorage.setItem('data', JSON.stringify(
-            {
-                tables,
-                framework_type: "express",
-                database: database,
-                use_auth: useJWT,
-                name,
-                description,
-                packageName,
-                author,
-                time: new Date().getTime()
-            }
-        ))
+        if (tables.length === 0) {
+            alert('Add tables first :)')
+        } else {
+            setLoading(true)
+            localStorage.setItem('data', JSON.stringify(
+                {
+                    tables,
+                    framework_type: "express",
+                    database: database,
+                    use_auth: useJWT,
+                    name,
+                    description,
+                    packageName,
+                    author,
+                    time: new Date().getTime()
+                }
+            ))
+        }
     }
 
     return (
@@ -194,8 +198,9 @@ function Dashboard() {
                             <span><span className='green'>code.</span>vocations</span>
                         </div>
                         <div className='Body'>
-                            <span className='Info'>The project was created by <a href='https://www.linkedin.com/in/daniel-nikulshyn-741986189'>me</a> in 2022. At first it was my own utility to speed up my work on startups and then I decided it was a good tool to share with others. Despite this time, when there is a war in my country, I try to do something useful. I wish everyone easy coding and have a nice day ;)</span>
-                            <span className='InfoButton'><a href='https://twitter.com/codevocations'>Discover all updates</a></span>
+                            <div className='Info'>The project was created by <a href='https://www.linkedin.com/in/daniel-nikulshyn-741986189'>me</a> in 2022. At first it was my own utility to speed up my work on startups and then I decided it was a good tool to share with others. Despite this time, when there is a war in my country, I try to do something useful. I wish everyone easy coding and have a nice day ;)</div>
+                            <div className='InfoButton'><a href='https://twitter.com/codevocations'>Discover all updates</a></div>
+                            <div className='InfoButton'><a href='https://twitter.com/codevocations'>Discover all features</a></div>
                         </div>
                     </div>
                 </div>
@@ -264,7 +269,7 @@ function Dashboard() {
                                 Framework
                             </div>
                             <div className='ItemOptions'>
-                                <div className='CheckOption'><input checked={useExpress} onChange={(e) => setUseExpress(true)} type="checkbox"/> Express.js</div>
+                                <div className='CheckOption'><input checked={useExpress} onChange={(e) => setUseExpress(true)} type="checkbox"/> Express.js <div className='cost' title='price of this option'>free</div></div>
                             </div>
                         </div>
                         <div className='ParamItem'>
@@ -272,12 +277,12 @@ function Dashboard() {
                                 Database
                             </div>
                             <div className='ItemOptions'>
-                                <div className='CheckOption'><input type="checkbox" checked={database === 'mysql' ? true : false} onChange={() => setDatabase('mysql')}/> MySQL</div>
-                                <div className='CheckOption'><input type="checkbox" checked={database === 'postgresql' ? true : false} onChange={() => setDatabase('postgresql')}/> PostgreSQL <div className='cost' title='price of this option'>4$</div></div>
-                                <div className='CheckOption'><input type="checkbox" checked={database === 'mariadb' ? true : false} onChange={() => setDatabase('mariadb')}/> MariaDB</div>
-                                <div className='CheckOption'><input type="checkbox" checked={database === 'sqlite' ? true : false} onChange={() => setDatabase('sqlite')}/> SQLite</div>
-                                <div className='CheckOption'><input type="checkbox" checked={database === 'microsoft_sql_server' ? true : false} onChange={() => setDatabase('microsoft_sql_server')}/> Microsoft SQL Server</div>
-                                <div className='CheckOption'><input type="checkbox" checked={database === 'mongodb' ? true : false} onChange={() => setDatabase('mongodb')}/> MongoDB <div className='cost' title='price of this option'>5$</div></div>
+                                <div className='CheckOption'><input type="checkbox" checked={database === 'mysql' ? true : false} onChange={() => setDatabase('mysql')}/> MySQL <div className='cost' title='price of this option'>$15</div></div>
+                                <div className='CheckOption'><input type="checkbox" checked={database === 'postgresql' ? true : false} onChange={() => setDatabase('postgresql')}/> PostgreSQL <div className='cost' title='price of this option'>$29</div></div>
+                                <div className='CheckOption'><input type="checkbox" checked={database === 'mongodb' ? true : false} onChange={() => setDatabase('mongodb')}/> MongoDB <div className='cost' title='price of this option'>$35</div></div>
+                                <div className='CheckOption'><input type="checkbox" checked={database === 'mariadb' ? true : false} onChange={() => setDatabase('mariadb')}/> MariaDB <div className='cost' title='price of this option'>free</div></div>
+                                <div className='CheckOption'><input type="checkbox" checked={database === 'sqlite' ? true : false} onChange={() => setDatabase('sqlite')}/> SQLite <div className='cost' title='price of this option'>free</div></div>
+                                <div className='CheckOption'><input type="checkbox" checked={database === 'microsoft_sql_server' ? true : false} onChange={() => setDatabase('microsoft_sql_server')}/> SQL Server <div className='cost' title='price of this option'>free</div></div>
                             </div>
                         </div>
                         <div className='ParamItem'>
@@ -285,7 +290,7 @@ function Dashboard() {
                                 Auth
                             </div>
                             <div className='ItemOptions'>
-                                <div className='CheckOption'><input value={useJWT} checked={useJWT} onChange={() => setUseJWT(!useJWT)} type="checkbox"/> JWT <div className='cost' title='price of this option'>3$</div></div>
+                                <div className='CheckOption'><input value={useJWT} checked={useJWT} onChange={() => setUseJWT(!useJWT)} type="checkbox"/> JWT <div className='cost' title='price of this option'>$8</div></div>
                                 { useJWT &&  <div className='tip'>'users' table will be created automatically</div>}
                             </div>
                         </div>
@@ -327,9 +332,28 @@ function Dashboard() {
                     </div>
                 </div>
                 <div className={isDark ? 'Footer dark' : 'Footer white'}>
-                    <a href="#!" className={isDark ? 'Button dark' : 'Button white'} onClick={() => generate()} data-product={useJWT & database === 'mongodb' ? '787442' : useJWT & database === 'postgresql' ? '787443' : !useJWT & database === 'mongodb' ? '787439' : !useJWT & database === 'postgresql' ? '787440' : useJWT & database !== 'postgresql' & database !== 'mongodb' ? '787438' : '' /* free */}>
-                        GENERATE FOR {useJWT & database === 'mongodb' ? '8$' : useJWT & database === 'postgresql' ? '7$' : !useJWT & database === 'mongodb' ? '5$' : !useJWT & database === 'postgresql' ? '4$' : useJWT & database !== 'postgresql' & database !== 'mongodb' ? '3$' : 'FREE'}
-                    </a>
+                    { 
+                        (
+                            database !== 'mysql' &&
+                            database !== 'mongodb' &&
+                            database !== 'postgresql' &&
+                            !useJWT
+                        ) 
+                        ?
+                        <div className={isDark ? 'Button dark' : 'Button white'}>GENERATE FOR FREE</div>
+                        :
+                        <a href="#!" className={isDark ? 'Button dark' : 'Button white'} onClick={() => generate()} data-product={
+                            useJWT & database === 'mysql' ? '787844' 
+                            : useJWT & database === 'mongodb' ? '787442' 
+                            : useJWT & database === 'postgresql' ? '787443' 
+                            : !useJWT & database === 'mongodb' ? '787439' 
+                            : !useJWT & database === 'postgresql' ? '787440' 
+                            : !useJWT & database === 'mysql' ? '787842' 
+                            : useJWT & database !== 'postgresql' & database !== 'mongodb' & database !== 'mysql' && '787438'
+                        }>
+                            GENERATE FOR {useJWT & database === 'mysql' ? '$23' : useJWT & database === 'mongodb' ? '$43' : useJWT & database === 'postgresql' ? '$37' : !useJWT & database === 'mongodb' ? '$35' : !useJWT & database === 'postgresql' ? '$29' : !useJWT & database === 'mysql' ? '$15' : useJWT & database !== 'postgresql' & database !== 'mongodb' & database !== 'mysql' && '$8'}
+                        </a>
+                    }
                     <div className={isDark ? 'Button dark' : 'Button white'} onClick={() => share()}>
                         SHARE...
                     </div>

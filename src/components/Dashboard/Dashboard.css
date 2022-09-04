@@ -64,6 +64,15 @@
     color: #55AD9C;
 }
 
+.HelperInfo {
+    margin-top: 40px;
+    font-size: 16px;
+}
+
+.Body img {
+    height: 90px;
+}
+
 .cost {
     color: #3fbba2;
     margin-left: 7px;
@@ -72,7 +81,7 @@
     font-weight: bold;
     right: 0;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     font-style: italic;
 }
 
