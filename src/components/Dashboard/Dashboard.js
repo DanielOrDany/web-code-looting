@@ -3,20 +3,38 @@ import axios from 'axios'
 import './Dashboard.css'
 import LogoIcon from '../../icons/logo.svg'
 
+function downloadURI(uri, name) {
+    var link = document.createElement("a");
+    // If you don't know the name or want to use
+    // the webserver default set name = ''
+    link.setAttribute('download', name);
+    link.href = uri;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+}
+
 function Dashboard() {
     const urlSearchParams = new URLSearchParams(window.location.search)
     const params = Object.fromEntries(urlSearchParams.entries())
+
+    if (localStorage.getItem('user_id')) {
+        // nothing
+    } else {
+        localStorage.setItem('user_id', Math.random().toString(16).slice(2) + Math.random().toString(16).slice(2))
+    }
 
     if (params.success) {
         const data = JSON.parse(localStorage.getItem('data'))
 
         if (data && data.time && new Date().getTime() - data.time > 3600000) {
-            axios.post('https://api.code.vocations/apig', {
+            axios.post('http://localhost:3333/apig', { // 'https://api.code.vocations/apig', {
                 tables: data.tables,
                 framework_type: data.framework_type,
                 database_type: data.database,
                 use_auth: data.use_auth,
                 name: data.name,
+                user_id: localStorage.getItem('user_id'),
                 description: data.description,
                 packageName: data.packageName,
                 author: data.author
@@ -147,19 +165,41 @@ function Dashboard() {
             alert('Add tables first :)')
         } else {
             setLoading(true)
-            localStorage.setItem('data', JSON.stringify(
-                {
-                    tables,
-                    framework_type: "express",
-                    database: database,
-                    use_auth: useJWT,
-                    name,
-                    description,
-                    packageName,
-                    author,
-                    time: new Date().getTime()
-                }
-            ))
+
+            const data = {
+                tables,
+                framework_type: "express",
+                database: database,
+                use_auth: useJWT,
+                name,
+                description,
+                packageName,
+                author,
+                time: new Date().getTime()
+            }
+
+            localStorage.setItem('data', JSON.stringify(data))
+
+            axios.post('http://localhost:3333/apig', { // 'https://api.code.vocations/apig', {
+                tables: data.tables,
+                framework_type: data.framework_type,
+                database_type: data.database,
+                use_auth: data.use_auth,
+                name: data.name,
+                user_id: localStorage.getItem('user_id'),
+                description: data.description,
+                packageName: data.packageName,
+                author: data.author
+            })
+            .then(function (response) {
+                console.log(response);
+                setTimeout(() => {
+                    downloadURI(`http://localhost:3333/storage?folder_name=${response.data.folder_name}&user_id=${localStorage.getItem('user_id')}&token=fff`, 'api')
+                }, 1300)
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
         }
     }
 
@@ -201,6 +241,8 @@ function Dashboard() {
                             <div className='Info'>The project was created by <a href='https://www.linkedin.com/in/daniel-nikulshyn-741986189'>me</a> in 2022. At first it was my own utility to speed up my work on startups and then I decided it was a good tool to share with others. Despite this time, when there is a war in my country, I try to do something useful. I wish everyone easy coding and have a nice day ;)</div>
                             <div className='InfoButton'><a href='https://twitter.com/codevocations'>Discover all updates</a></div>
                             <div className='InfoButton'><a href='https://twitter.com/codevocations'>Discover all features</a></div>
+                            <div className='InfoButton'><a href='/return-policy'>Return policy</a></div>
+                            <div className='InfoButton'><a href='/terms-of-service'>Terms of service</a></div>
                         </div>
                     </div>
                 </div>

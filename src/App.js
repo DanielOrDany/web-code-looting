@@ -5,6 +5,8 @@ import {
 } from "react-router-dom"
 import './App.css'
 import Dashboard from "./components/Dashboard/Dashboard"
+import Terms from "./views/Terms"
+import RefundPolicy from "./views/RefundPolicy"
 
 function App() {
   return (
@@ -13,7 +15,8 @@ function App() {
         <div className="container">
           <Routes>
               <Route path="/" element={<Dashboard />} />
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/return-policy" element={<RefundPolicy />} />
+              <Route path="/terms-of-service" element={<Terms />} />
           </Routes>
         </div>
       </Router>
