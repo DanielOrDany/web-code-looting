@@ -28,7 +28,7 @@ function Dashboard() {
         const data = JSON.parse(localStorage.getItem('data'))
 
         if (data && data.time && new Date().getTime() - data.time > 3600000) {
-            axios.post('http://localhost:3333/apig', { // 'https://api.code.vocations/apig', {
+            axios.post('https://api.code.vocations/apig', { // 'https://api.code.vocations/apig', {
                 tables: data.tables,
                 framework_type: data.framework_type,
                 database_type: data.database,
@@ -180,7 +180,7 @@ function Dashboard() {
 
             localStorage.setItem('data', JSON.stringify(data))
 
-            axios.post('http://localhost:3333/apig', { // 'https://api.code.vocations/apig', {
+            axios.post('https://api.code.vocations/apig', { // 'https://api.code.vocations/apig', {
                 tables: data.tables,
                 framework_type: data.framework_type,
                 database_type: data.database,
@@ -194,8 +194,9 @@ function Dashboard() {
             .then(function (response) {
                 console.log(response);
                 setTimeout(() => {
-                    downloadURI(`http://localhost:3333/storage?folder_name=${response.data.folder_name}&user_id=${localStorage.getItem('user_id')}&token=fff`, 'api')
-                }, 1300)
+                    downloadURI(`https://api.code.vocations/storage?folder_name=${response.data.folder_name}&user_id=${localStorage.getItem('user_id')}&token=fff`, 'api')
+                    setLoading(true)
+                }, 300)
             })
             .catch(function (error) {
                 console.log(error);
