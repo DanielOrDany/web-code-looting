@@ -74,6 +74,7 @@
 }
 
 .cost {
+    display: none;
     color: #3fbba2;
     margin-left: 7px;
     padding: 0px;
@@ -139,6 +140,10 @@
     flex-direction: column;
     align-items: flex-start;
     margin: 20px;
+}
+
+.ParamItem img {
+    width: 250px;
 }
 
 .ItemOptions {

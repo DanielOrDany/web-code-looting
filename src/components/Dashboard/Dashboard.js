@@ -340,15 +340,16 @@ function Dashboard() {
                             </div>
                         </div>
                         <div className='ParamItem'>
-                            <div className='ItemTitle'>
+                            {/* <div className='ItemTitle'>
                                 Project Metadata
-                            </div>
-                            <div className='ItemOptions'>
+                            </div> */}
+                            <a href="https://www.buymeacoffee.com/daniel.n"><img src={`https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=daniel.n&button_colour=${isDark ? 'ffffff' : '000000'}&font_colour=${isDark ? '000000' : 'ffffff'}&font_family=Cookie&outline_colour=${isDark ? '000000' : 'ffffff'}&coffee_colour=FFDD00`}/></a>
+                            {/* <div className='ItemOptions'>
                                 <div className='FieldOption'>Name <input placeholder='demo' value={name} onChange={(e) => setName(e.target.value)} className={isDark ? 'field dark' : 'field white'}/></div>
                                 <div className='FieldOption'>Description <input placeholder='demo project' value={description} onChange={(e) => setDescription(e.target.value)} className={isDark ? 'field dark' : 'field white'}/></div>
                                 <div className='FieldOption'>Package name <input placeholder='com.example.demo' value={packageName} onChange={(e) => setPackageName(e.target.value)} className={isDark ? 'field dark' : 'field white'}/></div>
                                 <div className='FieldOption'>Author <input placeholder='your name' value={author} onChange={(e) => setAuthor(e.target.value)} className={isDark ? 'field dark' : 'field white'}/></div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div className='RightBodyPart'>
@@ -377,28 +378,9 @@ function Dashboard() {
                     </div>
                 </div>
                 <div className={isDark ? 'Footer dark' : 'Footer white'}>
-                    { 
-                        (
-                            database !== 'mysql' &&
-                            database !== 'mongodb' &&
-                            database !== 'postgresql' &&
-                            !useJWT
-                        ) 
-                        ?
-                        <div className={isDark ? 'Button dark' : 'Button white'}>GENERATE FOR FREE</div>
-                        :
-                        <a href="#!" className={isDark ? 'Button dark' : 'Button white'} onClick={() => generate()} data-product={
-                            useJWT & database === 'mysql' ? '787844' 
-                            : useJWT & database === 'mongodb' ? '787442' 
-                            : useJWT & database === 'postgresql' ? '787443' 
-                            : !useJWT & database === 'mongodb' ? '787439' 
-                            : !useJWT & database === 'postgresql' ? '787440' 
-                            : !useJWT & database === 'mysql' ? '787842' 
-                            : useJWT & database !== 'postgresql' & database !== 'mongodb' & database !== 'mysql' && '787438'
-                        }>
-                            GENERATE FOR {useJWT & database === 'mysql' ? '$23' : useJWT & database === 'mongodb' ? '$43' : useJWT & database === 'postgresql' ? '$37' : !useJWT & database === 'mongodb' ? '$35' : !useJWT & database === 'postgresql' ? '$29' : !useJWT & database === 'mysql' ? '$15' : useJWT & database !== 'postgresql' & database !== 'mongodb' & database !== 'mysql' && '$8'}
-                        </a>
-                    }
+                    <button className={isDark ? 'Button dark' : 'Button white'} onClick={() => generate()}>
+                        GENERATE FOR FREE
+                    </button>
                     <div className={isDark ? 'Button dark' : 'Button white'} onClick={() => share()}>
                         SHARE...
                     </div>
