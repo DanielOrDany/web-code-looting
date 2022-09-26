@@ -192,15 +192,17 @@ function Dashboard() {
                 author: data.author
             })
             .then(function (response) {
-                console.log(response);
+                console.log(response)
                 setTimeout(() => {
                     downloadURI(`https://api.code.vocations/storage?folder_name=${response.data.folder_name}&user_id=${localStorage.getItem('user_id')}&token=fff`, 'api')
-                    setLoading(true)
-                }, 300)
+                    setTimeout(() => {
+                        setLoading(true)
+                    }, 3000)
+                }, 1000)
             })
             .catch(function (error) {
-                console.log(error);
-            });
+                console.log(error)
+            })
         }
     }
 
