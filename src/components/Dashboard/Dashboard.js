@@ -192,7 +192,7 @@ function Dashboard() {
                 author: data.author
             })
             .then(function (response) {
-                setLoading(true)
+                setLoading(false)
                 setTimeout(() => {
                     downloadURI(`https://api.code.vacations/storage?folder_name=${response.data.folder_name}&user_id=${localStorage.getItem('user_id')}&token=fff`, 'api')
                 }, 1000)
