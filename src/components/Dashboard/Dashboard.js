@@ -28,7 +28,7 @@ function Dashboard() {
         const data = JSON.parse(localStorage.getItem('data'))
 
         if (data && data.time && new Date().getTime() - data.time > 3600000) {
-            axios.post('https://api.code.vocations/apig', { // 'https://api.code.vocations/apig', {
+            axios.post('https://api.code.vacations/apig', { // 'https://api.code.vocations/apig', {
                 tables: data.tables,
                 framework_type: data.framework_type,
                 database_type: data.database,
@@ -149,7 +149,7 @@ function Dashboard() {
     }
 
     const share = () => {
-        let shareURL = `https://code.vocations?jwt=${useJWT}&express=${useExpress}&database=${database}`
+        let shareURL = `https://code.vacations?jwt=${useJWT}&express=${useExpress}&database=${database}`
         
         if (name.trim() !== '') shareURL += `&name=${name}`
         if (description.trim() !== '') shareURL += `&description=${description}`
@@ -180,7 +180,7 @@ function Dashboard() {
 
             localStorage.setItem('data', JSON.stringify(data))
 
-            axios.post('https://api.code.vocations/apig', { // 'https://api.code.vocations/apig', {
+            axios.post('https://api.code.vacations/apig', { // 'https://api.code.vocations/apig', {
                 tables: data.tables,
                 framework_type: data.framework_type,
                 database_type: data.database,
@@ -194,7 +194,7 @@ function Dashboard() {
             .then(function (response) {
                 console.log(response)
                 setTimeout(() => {
-                    downloadURI(`https://api.code.vocations/storage?folder_name=${response.data.folder_name}&user_id=${localStorage.getItem('user_id')}&token=fff`, 'api')
+                    downloadURI(`https://api.code.vacations/storage?folder_name=${response.data.folder_name}&user_id=${localStorage.getItem('user_id')}&token=fff`, 'api')
                     setTimeout(() => {
                         setLoading(true)
                     }, 3000)
