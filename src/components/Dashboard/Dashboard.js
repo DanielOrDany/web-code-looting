@@ -235,7 +235,7 @@ function Dashboard() {
                     <div className='InfoCardConstructor'>
                         <div className='Header'>
                             <img src={LogoIcon}/>
-                            <span><span className='green'>code.</span>vocations</span>
+                            <span><span className='green'>code.</span>vacations</span>
                         </div>
                         <div className='Body'>
                             <div className='Info'>The project was created by <a href='https://www.linkedin.com/in/daniel-nikulshyn-741986189'>me</a> in 2022. At first it was my own utility to speed up my work on startups and then I decided it was a good tool to share with others. Despite this time, when there is a war in my country, I try to do something useful. I wish everyone easy coding and have a nice day ;)</div>
@@ -302,7 +302,8 @@ function Dashboard() {
             <div className={isDark ? 'Constructor dark' : 'Constructor white'}>
                 <div className='Header'>
                     <img src={LogoIcon}/>
-                    <span><span className='green'>code.</span>vocations</span>
+                    <span><span className='green'>code.</span>vacations</span>
+                    <p className='green'>ALREADY 132^ GENERATED APIS</p>
                 </div>
                 <div className='Body'>
                     <div className='LeftBodyPart'>
