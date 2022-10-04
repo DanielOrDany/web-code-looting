@@ -303,7 +303,7 @@ function Dashboard() {
                 <div className='Header'>
                     <img src={LogoIcon}/>
                     <span><span className='green'>code.</span>vacations</span>
-                    <p className='green'>ALREADY 132^ GENERATED APIS</p>
+                    <p className='green'>ALREADY 141^ GENERATED APIS</p>
                 </div>
                 <div className='Body'>
                     <div className='LeftBodyPart'>
