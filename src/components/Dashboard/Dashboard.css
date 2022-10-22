@@ -38,11 +38,14 @@
 }
 
 .RightMenu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     border-left: 1px solid rgb(231, 231, 231);
     width: 75px;
     padding: 5px;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .Header {
@@ -55,13 +58,15 @@
 }
 
 .Header span {
-    font-size: 30px;
+    font-size: 4vmin;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     margin-top: -20px;
 }
 
 .Header p {
-    font-size: 14px;
+    cursor: pointer;
+    width: max-content;
+    font-size: 1.5vmin;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     margin-top: -20px;
     text-decoration: overline;
@@ -95,8 +100,8 @@
 }
 
 .Header img {
-    height: 120px;
-    width: 120px;
+    height: 12vmin;
+    width: 12vmin;
 }
 
 .Body {
@@ -110,6 +115,7 @@
     align-items: center;
     width: 100%;
     justify-content: space-between;
+    padding-bottom: 20px;
     border-bottom: 1px solid rgb(231, 231, 231);
 }
 
@@ -120,9 +126,9 @@
     }
 
     .RightBodyPart {
+        width: calc(100vw - 150px);
         padding: 40px;
-        border-top: 1px solid rgb(231, 231, 231);
-        border-left: 0px;
+        border-left: none;
     }
 
     .TableCard {
@@ -133,6 +139,14 @@
     .CardBackground {
         width: 100%;
         height: 100vh;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .RightBodyPart {
+        flex: 50%;
+        padding: 0px 40px 40px 40px;
+        border-left: 1px solid rgb(231, 231, 231);
     }
 }
 
@@ -198,12 +212,6 @@
     background: none;
     width: 200px;
     font-size: 16px;
-}
-
-.RightBodyPart {
-    flex: 50%;
-    padding: 0px 40px 40px 40px;
-    border-left: 1px solid rgb(231, 231, 231);
 }
 
 .Footer {
