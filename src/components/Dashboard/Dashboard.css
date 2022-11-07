@@ -632,7 +632,7 @@
     max-height: 450px;
 }
 
-.Loader {
+.Loader-dark {
     position: absolute;
     margin: auto;
     left: 0;
@@ -641,32 +641,23 @@
     bottom: 0;
     width: 8vmax;
     height: 8vmax;
-    border-right: 4px solid rgb(30, 255, 0);
+    border-right: 6px solid rgb(255, 255, 255);
     border-radius: 100%;
     animation: spinRight 800ms linear infinite; 
 }
 
-.Loader:before, .Loader:after {
-    content: '';
-    width: 6vmax;
-    height: 6vmax;
-    display: block;
+.Loader-white {
     position: absolute;
-    top: calc(50% - 3vmax);
-    left: calc(50% - 3vmax);
-    border-left: 3px solid #000;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 8vmax;
+    height: 8vmax;
+    border-right: 6px solid rgb(0, 0, 0);
     border-radius: 100%;
-    animation: spinLeft 800ms linear infinite;
-}
-  
-.Loader:after {
-    width: 4vmax;
-    height: 4vmax;
-    top: calc(50% - 2vmax);
-    left: calc(50% - 2vmax);
-    border: 0;
-    border-right: 2px solid #000;
-    animation: none;
+    animation: spinRight 800ms linear infinite; 
 }
   
 @keyframes spinLeft {

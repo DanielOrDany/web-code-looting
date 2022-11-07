@@ -3,12 +3,15 @@ import axios from 'axios'
 import './Dashboard.css'
 import LogoIcon from '../../icons/logo.svg'
 
-function downloadURI(uri, name) {
-    var link = document.createElement("a");
+async function downloadURI(url, name) {
+    const res = await fetch(url)
+    const resData = await res.json()
+    let link = document.createElement("a");
+    console.log(resData)
     // If you don't know the name or want to use
     // the webserver default set name = ''
     link.setAttribute('download', name);
-    link.href = uri;
+    link.href = resData.url;
     document.body.appendChild(link);
     link.click();
     link.remove();
@@ -28,7 +31,7 @@ function Dashboard() {
         const data = JSON.parse(localStorage.getItem('data'))
 
         if (data && data.time && new Date().getTime() - data.time > 3600000) {
-            axios.post('https://api.code.vacations/apig', { // 'https://api.code.vocations/apig', {
+            axios.post(process.env.REACT_APP_API_GENERATOR_PATH, { // 'https://api.code.vocations/apig', {
                 tables: data.tables,
                 framework_type: data.framework_type,
                 database_type: data.database,
@@ -180,7 +183,7 @@ function Dashboard() {
 
             localStorage.setItem('data', JSON.stringify(data))
 
-            axios.post('https://api.code.vacations/apig', { // 'https://api.code.vocations/apig', {
+            axios.post(process.env.REACT_APP_API_GENERATOR_PATH, { // 'https://api.code.vocations/apig', {
                 tables: data.tables,
                 framework_type: data.framework_type,
                 database_type: data.database,
@@ -192,9 +195,9 @@ function Dashboard() {
                 author: data.author
             })
             .then(function (response) {
-                setLoading(false)
-                setTimeout(() => {
-                    downloadURI(`https://api.code.vacations/storage?folder_name=${response.data.folder_name}&user_id=${localStorage.getItem('user_id')}&token=fff`, 'api')
+                setTimeout(async () => {
+                    await downloadURI(`${process.env.REACT_APP_API_STORAGE_PATH}?folder_name=${response.data.folder_name}&user_id=${localStorage.getItem('user_id')}&token=fff`, 'api')
+                    setLoading(false)
                 }, 1000)
             })
             .catch(function (error) {
@@ -207,7 +210,7 @@ function Dashboard() {
         <div className='Dashboard'>
             { isLoading &&
                 <div className='CardBackground'>
-                    <div className='Loader'/>
+                    <div className={isDark ? 'Loader-dark' : 'Loader-white'}/>
                 </div>
             }
             { isShare &&
