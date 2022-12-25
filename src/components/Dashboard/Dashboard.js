@@ -17,34 +17,9 @@ async function downloadURI(url, name) {
     link.remove();
 }
 
-async function Dashboard() {
+function Dashboard() {
     const urlSearchParams = new URLSearchParams(window.location.search)
     const params = Object.fromEntries(urlSearchParams.entries())
-
-    const query = new URLSearchParams(window.location.search);
-    const token = query.get('token')
-
-    if (token) {
-        const oldToken = localStorage.getItem('token');
-        const res = await fetch("https://zx8hsmle2j.execute-api.eu-central-1.amazonaws.com/production/api/v1/auth/verify?token=" + oldToken, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-
-        const data = await res.json()
-        console.log('red data', data)
-
-        if (!data.success) {
-            localStorage.removeItem('token')
-            window.location.href = "https://auth.welcomenocode.com?app=codevacations"
-        } else {
-            localStorage.setItem('token', token)
-        }
-    } else {
-        window.location.href = "https://auth.welcomenocode.com?app=codevacations"
-    }
 
     if (localStorage.getItem('user_id')) {
         // nothing
@@ -99,6 +74,52 @@ async function Dashboard() {
     const [isShare, setShare] = useState(false)
     const [shareUrl, setShareUrl] = useState('')
     const [isLoading, setLoading] = useState(false)
+    const [isRender, setRender] = useState(true)
+
+    useEffect(() => {
+        verifyToken()
+    })
+
+    const verifyToken = async () => {
+        if (isRender) {
+            const query = new URLSearchParams(window.location.search);
+            const token = query.get('token')
+    
+            if (token) {
+                const oldToken = localStorage.getItem('token');
+    
+                if (oldToken) {
+                    const res = await fetch("https://zx8hsmle2j.execute-api.eu-central-1.amazonaws.com/production/api/v1/auth/verify?token=" + oldToken, {
+                        method: "GET"
+                    })
+            
+                    const data = await res.json()
+            
+                    if (!data.success) {
+                        localStorage.removeItem('token')
+                        window.location.href = "https://auth.welcomenocode.com?app=codevacations"
+                    }
+                } else {
+                    const res = await fetch("https://zx8hsmle2j.execute-api.eu-central-1.amazonaws.com/production/api/v1/auth/verify?token=" + token, {
+                        method: "GET"
+                    })
+            
+                    const data = await res.json()
+            
+                    if (!data.success) {
+                        localStorage.removeItem('token')
+                        window.location.href = "https://auth.welcomenocode.com?app=codevacations"
+                    } else {
+                        localStorage.setItem('token', token)
+                    }
+                }
+            } else {
+                window.location.href = "https://auth.welcomenocode.com?app=codevacations"
+            }
+    
+            setRender(false)
+        }
+    }
 
     const openTwitter = () => {
         window.open('https://twitter.com/codevocations')
