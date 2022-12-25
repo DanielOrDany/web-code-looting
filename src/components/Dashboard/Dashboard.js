@@ -114,7 +114,22 @@ function Dashboard() {
                     }
                 }
             } else {
-                window.location.href = "https://auth.welcomenocode.com?app=codevacations"
+                const oldToken = localStorage.getItem('token');
+
+                if (oldToken) {
+                    const res = await fetch("https://zx8hsmle2j.execute-api.eu-central-1.amazonaws.com/production/api/v1/auth/verify?token=" + oldToken, {
+                        method: "GET"
+                    })
+            
+                    const data = await res.json()
+            
+                    if (!data.success) {
+                        localStorage.removeItem('token')
+                        window.location.href = "https://auth.welcomenocode.com?app=codevacations"
+                    }
+                } else {
+                    window.location.href = "https://auth.welcomenocode.com?app=codevacations"
+                }
             }
     
             setRender(false)
