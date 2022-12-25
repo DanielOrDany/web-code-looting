@@ -24,7 +24,7 @@ async function Dashboard() {
     const query = new URLSearchParams(window.location.search);
     const token = query.get('token')
 
-    if (localStorage.getItem('token')) {
+    if (token) {
         const oldToken = localStorage.getItem('token');
         const res = await fetch("https://zx8hsmle2j.execute-api.eu-central-1.amazonaws.com/production/api/v1/auth/verify?token=" + oldToken, {
             method: "GET",
